@@ -4,8 +4,8 @@ set -e;
 
 if [ $"$*" = "-h" ] || [ $"$*" = "--help" ];
 then
-    SELF=$(basename $0);
     VERSION="v1.0.0";
+    SELF=$(basename $0);
     printf "$SELF $VERSION\n";
     printf "Replaces the name of environment variables in a file with their values.\n";
     printf "Use: $SELF <input file> <output file>\n";
@@ -33,7 +33,7 @@ then
     exit 1;
 fi
 
-if [ -x "$(command -v envsubst2)"];
+if [ -z "$(command -v envsubst)" ];
 then
     printf "Program envsubst is not present.\n" >> /dev/stderr;
     exit 1;
