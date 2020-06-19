@@ -39,7 +39,7 @@ then
     exit 1;
 fi
 
-printf "Replacing envs from $FILE_IN to $FILE_OUT.\n";
+printf "Replacing envs from $FILE_IN to $FILE_OUT\n";
 
 DEFINED_ENVS=$(printf '${%s} ' $(env | cut -d= -f1));
 

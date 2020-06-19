@@ -49,7 +49,7 @@ do
     FILE_IN=$(realpath $DIR_IN/$FILE);
     FILE_OUT=$(realpath $DIR_OUT/$FILE_WITHOUT_SUFFIX);
 
-    printf "Replacing envs from $FILE_IN to $FILE_OUT.\n";
+    printf "Replacing envs from $FILE_IN to $FILE_OUT\n";
 
     envsubst "$DEFINED_ENVS" < "$FILE_IN" > "$FILE_OUT";
 done;
