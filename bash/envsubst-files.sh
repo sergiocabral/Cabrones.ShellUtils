@@ -39,8 +39,9 @@ mkdir -p $DIR_OUT;
 
 DEFINED_ENVS=$(printf '${%s} ' $(env | cut -d= -f1));
 
+# TODO: Não usar ls. Usar grep
 cd $DIR_IN
-for FILE in $(ls -1 *$FILES_SUFFIX);
+for FILE in $(ls -1 | grep -G $FILES_SUFFIX\$);
 do
     cd $DIR_SOURCE;
 
