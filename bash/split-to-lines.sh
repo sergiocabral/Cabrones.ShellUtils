@@ -23,7 +23,8 @@ fi
 
 IFS=$SEPARATOR;
 read -ra TEXT_PARTS <<< $TEXT
-for TEXT_PART in "${TEXT_PARTS[@]}"; do # access each element of array
+for TEXT_PART in "${TEXT_PARTS[@]}";
+do
     echo $TEXT_PART;
 done
 
