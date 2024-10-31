@@ -28,6 +28,7 @@
 #  password password-here
 ## Others Apps
 # apt install mysql-client
+# apt install tar
 # apt install zip
 
 error=false
@@ -63,6 +64,7 @@ check_command() {
 }
 
 mysqldumpCmd=$(check_command mysqldump)
+tarCmd=$(check_command tar)
 zipCmd=$(check_command zip)
 megaPutCmd=$(check_command mega-put)
 
@@ -225,11 +227,11 @@ fi
 
 if [ "${#sitePaths[@]}" -gt 0 ]; then
     for sitePath in "${sitePaths[@]}"; do
-        $zipCmd -r "${tempPath}/${backupFilename}-$(basename "$sitePath").zip" "$sitePath"
+        $tarCmd -cvf "${tempPath}/${backupFilename}-$(basename "$sitePath").tar" -C "$(dirname "$sitePath")" "$(basename "$sitePath")"
         if [ $? -ne 0 ]; then
             error=true
             echo2 "Error: Failed to compress website path '$sitePath'."
-            rm -f "${tempPath}/${backupFilename}-$(basename "$sitePath").zip"
+            rm -f "${tempPath}/${backupFilename}-$(basename "$sitePath").tar"
         fi
     done
 else
@@ -261,7 +263,7 @@ if $error; then
     echo2 "One or more errors occurred during the process."
     status="FAIL"
 else
-    echo2 "Process completed successfully without errors."
+    echo2 "Process completed successfully."
     status="SUCCESS"
 fi
 
