@@ -197,9 +197,9 @@ tempPath=$(mktemp -d /tmp/backup.XXXXXX)
 
 if $allDatabases; then
     if [ -n "$mysqlPassword" ]; then
-        $mysqldumpCmd --all-databases --column-statistics=0 -u "$mysqlUser" -p"$mysqlPassword" -h "$mysqlServer" -P "$mysqlPort" > "${tempPath}/${backupFilename}-all_databases.mysql.sql"
+        $mysqldumpCmd --all-databases --column-statistics=0 --single-transaction --skip-lock-tables -u "$mysqlUser" -p"$mysqlPassword" -h "$mysqlServer" -P "$mysqlPort" > "${tempPath}/${backupFilename}-all_databases.mysql.sql"
     else
-        $mysqldumpCmd --all-databases --column-statistics=0 -u "$mysqlUser" -h "$mysqlServer" -P "$mysqlPort" > "${tempPath}/${backupFilename}-all_databases.mysql.sql"
+        $mysqldumpCmd --all-databases --column-statistics=0 --single-transaction --skip-lock-tables -u "$mysqlUser" -h "$mysqlServer" -P "$mysqlPort" > "${tempPath}/${backupFilename}-all_databases.mysql.sql"
     fi
     if [ $? -ne 0 ]; then
         error=true
